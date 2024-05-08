@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:ecoin/routes/router.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,7 @@ class DashboardPage extends StatelessWidget {
       routes: const [
         HomeRoute(),
         HomeRoute(),
-        HomeRoute(),
+        CreatureRoute(),
         HomeRoute(),
         HomeRoute(),
       ],

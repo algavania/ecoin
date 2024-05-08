@@ -38,66 +38,70 @@ ThemeData ecoinThemeData(BuildContext context) {
       MaterialColor(primaryColor.value, primaryColorMap);
 
   return ThemeData(
-    useMaterial3: true,
-    primaryColor: primaryColor,
-    primarySwatch: primaryMaterialColor,
-    scaffoldBackgroundColor: ColorValues.lightGrey,
-    canvasColor: ColorValues.lightGrey,
-    brightness: Brightness.light,
-    appBarTheme: const AppBarTheme(
-      surfaceTintColor: Colors.transparent,
-    ),
-    navigationBarTheme: NavigationBarThemeData(
-      elevation: 0,
-      indicatorColor: Colors.transparent,
-      labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-      surfaceTintColor: ColorValues.white,
-      backgroundColor: ColorValues.white,
-      labelTextStyle: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+      useMaterial3: true,
+      primaryColor: primaryColor,
+      primarySwatch: primaryMaterialColor,
+      scaffoldBackgroundColor: ColorValues.lightGrey,
+      canvasColor: ColorValues.lightGrey,
+      brightness: Brightness.light,
+      appBarTheme: const AppBarTheme(
+        surfaceTintColor: Colors.transparent,
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        elevation: 0,
+        indicatorColor: Colors.transparent,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+        surfaceTintColor: ColorValues.white,
+        backgroundColor: ColorValues.white,
+        labelTextStyle: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
+            return const TextStyle(
+              color: ColorValues.text50,
+              fontSize: 13,
+              height: 0,
+              fontWeight: FontWeight.bold,
+            );
+          }
           return const TextStyle(
-            color: ColorValues.text50,
+            color: ColorValues.grey20,
             fontSize: 13,
             height: 0,
-            fontWeight: FontWeight.bold,
           );
-        }
-        return const TextStyle(
-          color: ColorValues.grey20,
-          fontSize: 13,
-          height: 0,
-        );
-      }),
-      iconTheme: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
-          return const IconThemeData(color: ColorValues.primary50);
-        }
-        return const IconThemeData(color: ColorValues.grey20);
-      }),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: ColorValues.primary50,
-        foregroundColor: ColorValues.secondaryText50,
-        minimumSize: const Size(double.infinity, 50),
-        elevation: 0,
-        padding: const EdgeInsets.all(Styles.contentPadding),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Styles.defaultBorder),
+        }),
+        iconTheme: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
+            return const IconThemeData(color: ColorValues.primary50);
+          }
+          return const IconThemeData(color: ColorValues.grey20);
+        }),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: ColorValues.primary50,
+          foregroundColor: ColorValues.secondaryText50,
+          minimumSize: const Size(double.infinity, 50),
+          elevation: 0,
+          padding: const EdgeInsets.all(Styles.contentPadding),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(Styles.defaultBorder),
+          ),
         ),
       ),
-    ),
-    outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        foregroundColor: ColorValues.secondaryText50,
-        elevation: 0,
-        padding: const EdgeInsets.all(Styles.contentPadding),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Styles.defaultBorder),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: ColorValues.secondaryText50,
+          elevation: 0,
+          padding: const EdgeInsets.all(Styles.contentPadding),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(Styles.defaultBorder),
+          ),
         ),
       ),
-    ),
-    iconTheme: const IconThemeData(color: ColorValues.grey50),
-    textTheme: AppTextStyles.style(context),
-  );
+      iconTheme: const IconThemeData(color: ColorValues.grey50),
+      textTheme: AppTextStyles.style(context),
+      tabBarTheme: TabBarTheme(
+          indicatorColor: ColorValues.primary50,
+          labelColor: ColorValues.primary50,
+          overlayColor:
+              MaterialStateProperty.all(ColorValues.grey10.withOpacity(0.5))));
 }
