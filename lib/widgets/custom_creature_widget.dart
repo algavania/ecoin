@@ -20,17 +20,17 @@ class CustomCreatureWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: ColorValues.white,
-        borderRadius: BorderRadius.circular(Styles.defaultBorder),
-      ),
-      height: 35.h,
-      width: width,
-      child: GestureDetector(
-        onTap: () {
-          AutoRouter.of(context).push(CreatureDetailRoute(creature: creature));
-        },
+    return GestureDetector(
+      onTap: () {
+        AutoRouter.of(context).push(CreatureDetailRoute(creature: creature));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: ColorValues.white,
+          borderRadius: BorderRadius.circular(Styles.defaultBorder),
+        ),
+        height: 35.h,
+        width: width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
