@@ -56,7 +56,7 @@ ThemeData ecoinThemeData(BuildContext context) {
       labelTextStyle: MaterialStateProperty.resolveWith((states) {
         if (states.contains(MaterialState.selected)) {
           return const TextStyle(
-            color: ColorValues.primary50,
+            color: ColorValues.text50,
             fontSize: 13,
             height: 0,
             fontWeight: FontWeight.bold,

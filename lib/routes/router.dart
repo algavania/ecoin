@@ -15,5 +15,17 @@ class AppRouter extends _$AppRouter {
           initial: true,
           transitionsBuilder: TransitionsBuilders.fadeIn,
         ),
+        CustomRoute(
+          page: DashboardRoute.page,
+          path: '/',
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+          children: [
+            CustomRoute(
+              page: HomeRoute.page,
+              path: 'home',
+              transitionsBuilder: TransitionsBuilders.fadeIn,
+            )
+          ]
+        ),
       ];
 }
