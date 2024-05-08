@@ -19,7 +19,7 @@ class AppRouter extends _$AppRouter {
         ),
         CustomRoute(
             page: DashboardRoute.page,
-            path: '/',
+            path: '/dashboard',
             transitionsBuilder: TransitionsBuilders.fadeIn,
             children: [
               CustomRoute(
