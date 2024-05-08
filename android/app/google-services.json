@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "598737797871",
+    "project_id": "ecoin-extend",
+    "storage_bucket": "ecoin-extend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598737797871:android:84ec81e7bc44aecc24d11a",
+        "android_client_info": {
+          "package_name": "com.extend.ecoin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM_ecBB49XjqzJguSp8BxkZxwZEMHzJJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

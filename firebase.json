@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"ecoin-extend","appId":"1:598737797871:android:84ec81e7bc44aecc24d11a","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"ecoin-extend","configurations":{"android":"1:598737797871:android:84ec81e7bc44aecc24d11a","ios":"1:598737797871:ios:4ba63b78307a908b24d11a"}}}}}}
