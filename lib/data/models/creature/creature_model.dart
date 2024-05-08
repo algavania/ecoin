@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecoin/core/enums.dart';
 import 'package:ecoin/data/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -10,9 +11,12 @@ part 'creature_model.g.dart';
 class CreatureModel with _$CreatureModel {
   const factory CreatureModel({
     required String name,
+    required String scientificName,
+    required String origin,
     required String category,
     required String description,
     required String imageUrl,
+    required String creatureType,
     @TimestampConverter() required DateTime createdAt,
     String? modelUrl,
     int? id,
@@ -25,7 +29,11 @@ class CreatureModel with _$CreatureModel {
 CreatureModel generateMockCreatureModel() {
   return CreatureModel(
       name: 'Komodo',
+      scientificName: 'Varanus komodoensis',
+      origin: 'Indonesia',
+      creatureType: CreatureType.animal.name,
       category: 'Reptilia',
+      modelUrl: 'https://raw.githubusercontent.com/srfiryal/3d-models/main/komodo/scene.gltf',
       description:
           'Komodo merupakan spesies terbesar dari familia Varanidae, sekaligus kadal terbesar di dunia, dengan rata-rata panjang 2-3 meter dan beratnya bisa mencapai 100 kg. Komodo merupakan pemangsa puncak di habitatnya karena sejauh ini tidak diketahui adanya hewan karnivora besar lain selain biawak ini di sebaran geografisnya.',
       imageUrl:

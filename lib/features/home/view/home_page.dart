@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildCreatureSection() {
     final model = generateMockCreatureModel();
     return CustomSectionWidget(
-        title: 'Kenali Makhluk hidup',
+        title: 'Kenali Makhluk Hidup',
         rightText: 'Lihat Semua',
         child: SizedBox(
           height: 35.h,
@@ -88,6 +88,7 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, __) => CustomCreatureWidget(
                     creature: model,
+                    width: 38.w,
                   ),
               separatorBuilder: (_, __) => const SizedBox(
                     width: Styles.defaultSpacing,

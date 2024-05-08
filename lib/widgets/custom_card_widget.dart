@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecoin/core/color_values.dart';
 import 'package:ecoin/core/styles.dart';
 import 'package:ecoin/utils/extensions.dart';
@@ -32,7 +33,7 @@ class CustomCardWidget extends StatelessWidget {
                 topRight: Radius.circular(Styles.defaultBorder),
                 bottomRight: Radius.circular(Styles.defaultBorder),
               ),
-              child: Image.network(imageUrl, width: 40.w, fit: BoxFit.fill, height: 20.h, )),
+              child: CachedNetworkImage(imageUrl: imageUrl, width: 40.w, fit: BoxFit.fill, height: 20.h, )),
         ],
       ),
     );
