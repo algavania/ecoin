@@ -1,4 +1,5 @@
 import 'package:ecoin/core/styles.dart';
+import 'package:ecoin/database/shared_preferences_service.dart';
 import 'package:ecoin/routes/router.dart';
 import 'package:ecoin/utils/extensions.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,7 @@ class OnboardingPage extends StatelessWidget {
               const Spacer(),
               ElevatedButton(
                   onPressed: () {
+                    SharedPreferencesService.setIsFirstTime(value: false);
                     AutoRouter.of(context).replace(const DashboardRoute());
                   },
                   child: const Text('Mulai Sekarang')),

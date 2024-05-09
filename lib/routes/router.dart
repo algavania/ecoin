@@ -3,6 +3,7 @@ import 'package:ecoin/data/models/creature/creature_model.dart';
 import 'package:ecoin/data/models/story/ending_model.dart';
 import 'package:ecoin/data/models/story/scenario_model.dart';
 import 'package:ecoin/data/models/story/story_model.dart';
+import 'package:ecoin/database/shared_preferences_service.dart';
 
 import 'package:ecoin/features/pages.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +18,13 @@ class AppRouter extends _$AppRouter {
         CustomRoute(
           page: OnboardingRoute.page,
           path: '/onboarding',
-          initial: true,
+          initial: SharedPreferencesService.getIsFirstTime(),
           transitionsBuilder: TransitionsBuilders.fadeIn,
         ),
         CustomRoute(
             page: DashboardRoute.page,
             path: '/dashboard',
+            initial: !SharedPreferencesService.getIsFirstTime(),
             transitionsBuilder: TransitionsBuilders.fadeIn,
             children: [
               CustomRoute(

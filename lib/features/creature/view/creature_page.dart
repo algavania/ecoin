@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ecoin/data/models/creature/creature_model.dart';
 import 'package:ecoin/database/db_helper.dart';
 import 'package:ecoin/routes/router.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,7 @@ class _CreaturePageState extends State<CreaturePage> {
       builder: (context, child, controller) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Makhluk'),
+            title: const Text('Makhluk Hidup'),
             bottom: TabBar(
               controller: controller,
               tabs: const [
