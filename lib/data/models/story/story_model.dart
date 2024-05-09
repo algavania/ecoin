@@ -11,10 +11,11 @@ part 'story_model.g.dart';
 class StoryModel with _$StoryModel {
   const factory StoryModel({
     required String title,
+    required String subtitle,
     required String description,
     required String imageUrl,
     @TimestampConverter() required DateTime createdAt,
-    int? id,
+    String? id,
   }) = _StoryModel;
 
   factory StoryModel.fromJson(Map<String, Object?> json) =>
@@ -24,7 +25,8 @@ class StoryModel with _$StoryModel {
 StoryModel generateMockStoryModel() {
   return StoryModel(
       title: 'Perubahan Iklim',
-      description: 'Pelajari dampak dari aksi-aksimu terhadap iklim planet bumi',
+      subtitle: 'Pelajari dampak dari aksi-aksimu terhadap iklim planet bumi',
+      description: 'Cerita ini mencakup pengetahuan tentang penyebab, dampak, dan solusi terkait perubahan iklim. Ini melibatkan informasi tentang konsep-konsep ilmiah, seperti efek rumah kaca dan pemanasan global. Yuk, pelajari untuk menjaga keberlanjutan lingkungan!',
       imageUrl: 'https://firebasestorage.googleapis.com/v0/b/ecoin-extend.appspot.com/o/global-warming-4.png?alt=media&token=2a76f27f-cd8b-4634-aab3-afe114f2bba2',
       createdAt: DateTime.now());
 }

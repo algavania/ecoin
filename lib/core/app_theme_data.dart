@@ -41,6 +41,7 @@ ThemeData ecoinThemeData(BuildContext context) {
       useMaterial3: true,
       primaryColor: primaryColor,
       primarySwatch: primaryMaterialColor,
+      colorScheme: ColorScheme.fromSwatch(primarySwatch: primaryMaterialColor),
       scaffoldBackgroundColor: ColorValues.lightGrey,
       canvasColor: ColorValues.lightGrey,
       brightness: Brightness.light,
@@ -99,6 +100,7 @@ ThemeData ecoinThemeData(BuildContext context) {
       ),
       iconTheme: const IconThemeData(color: ColorValues.grey50),
       textTheme: AppTextStyles.style(context),
+      indicatorColor: ColorValues.primary50,
       tabBarTheme: TabBarTheme(
           indicatorColor: ColorValues.primary50,
           labelColor: ColorValues.primary50,
