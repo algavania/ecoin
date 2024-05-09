@@ -37,10 +37,6 @@ class DashboardPage extends StatelessWidget {
               icon: Icon(IconsaxPlusBold.document_normal),
               label: 'Kuis',
             ),
-            NavigationDestination(
-              icon: Icon(IconsaxPlusBold.profile),
-              label: 'Akun',
-            ),
           ],
         );
       },

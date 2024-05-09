@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ecoin/data/models/creature/creature_model.dart';
+import 'package:ecoin/data/models/quiz/quiz_item_model.dart';
 import 'package:ecoin/data/models/story/ending_model.dart';
 import 'package:ecoin/data/models/story/scenario_model.dart';
 import 'package:ecoin/data/models/story/story_model.dart';

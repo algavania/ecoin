@@ -23,17 +23,25 @@ class CustomCardWidget extends StatelessWidget {
         color: ColorValues.white,
         borderRadius: BorderRadius.circular(Styles.defaultBorder),
       ),
-      child: Row(
+      child: Stack(
         children: [
-          const SizedBox(width: Styles.defaultPadding,),
-          Expanded(child: _buildBody(context)),
-          const SizedBox(width: Styles.mediumSpacing,),
-          ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(Styles.defaultBorder),
-                bottomRight: Radius.circular(Styles.defaultBorder),
-              ),
-              child: CachedNetworkImage(imageUrl: imageUrl, width: 40.w, fit: BoxFit.fill, height: 20.h, )),
+          Row(
+            children: [
+              const SizedBox(width: Styles.defaultPadding,),
+              Expanded(child: _buildBody(context)),
+              const SizedBox(width: Styles.mediumSpacing,),
+              SizedBox(width: 40.w,),
+            ],
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(Styles.defaultBorder),
+                  bottomRight: Radius.circular(Styles.defaultBorder),
+                ),
+                child: CachedNetworkImage(imageUrl: imageUrl, fit: BoxFit.cover, height: 20.h, )),
+          ),
         ],
       ),
     );

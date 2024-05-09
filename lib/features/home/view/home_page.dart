@@ -44,14 +44,14 @@ class _HomePageState extends State<HomePage> {
         .addAll(List.generate(3, (index) => generateMockStoryModel()));
     _dummyCreatureList
         .addAll(List.generate(6, (index) => generateMockCreatureModel()));
-    _dummyQuizList.addAll(List.generate(3, (index) => generateMockQuizModel()));
+    _dummyQuizList.addAll(List.generate(1, (index) => generateMockQuizModel()));
     _getAllData();
     super.initState();
   }
 
   Future<void> _getAllData() async {
-    _storyBloc.add(const StoryEvent.getAllStories());
-    _creatureBloc.add(const CreatureEvent.getAllCreatures());
+    _storyBloc.add(const StoryEvent.getAllStories(limit: 3));
+    _creatureBloc.add(const CreatureEvent.getAllCreatures(limit: 6));
   }
 
   @override
