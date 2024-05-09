@@ -116,7 +116,7 @@ class _StoryPageState extends State<StoryPage> {
           },
           separatorBuilder: (_, __) =>
           const SizedBox(
-            height: Styles.defaultSpacing,
+            height: Styles.bigSpacing,
           ),
           itemCount: list.length),
     );

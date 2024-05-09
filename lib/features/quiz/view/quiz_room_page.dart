@@ -18,7 +18,13 @@ class QuizRoomPage extends StatefulWidget {
 
 class _QuizRoomPageState extends State<QuizRoomPage> {
   var _index = 0;
-  int _score = 0;
+  late List<String> _answers;
+
+  @override
+  void initState() {
+    _answers = List.generate(widget.list.length, (index) => '');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,16 +110,19 @@ class _QuizRoomPageState extends State<QuizRoomPage> {
   Widget _buildChoiceWidget(String choice, String description, String correctAnswer) {
     return GestureDetector(
       onTap: () {
-        if (choice.toLowerCase() == correctAnswer.toLowerCase()) {
-          _score++;
-        }
-
         if (_index < widget.list.length - 1) {
+          _answers[_index] = choice;
           setState(() {
             _index++;
           });
         } else {
-          AutoRouter.of(context).replace(QuizResultRoute(score: _score));
+          var score = 0;
+          for (var i = 0; i < widget.list.length; i++) {
+            if (widget.list[i].answer == _answers[i]) {
+              score++;
+            }
+          }
+          AutoRouter.of(context).replace(QuizResultRoute(score: score));
         }
       },
       child: Container(
@@ -130,9 +139,11 @@ class _QuizRoomPageState extends State<QuizRoomPage> {
             children: [
               Container(
                 padding: const EdgeInsets.all(Styles.mediumPadding),
-                decoration: const BoxDecoration(
-                  color: ColorValues.primary70,
-                  borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                  color: _answers[_index] == choice
+                      ? ColorValues.primary70
+                      : ColorValues.grey40,
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(Styles.defaultBorder),
                     bottomLeft: Radius.circular(Styles.defaultBorder),
                   ),
