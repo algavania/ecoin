@@ -19,7 +19,7 @@ class CreatureModel with _$CreatureModel {
     required String creatureType,
     @TimestampConverter() required DateTime createdAt,
     String? modelUrl,
-    int? id,
+    String? id,
   }) = _AnimalModel;
 
   factory CreatureModel.fromJson(Map<String, Object?> json) =>

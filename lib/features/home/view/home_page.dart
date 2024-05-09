@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
       rightText: 'Lihat Detail',
       child: CustomCardWidget(
           title: model.title,
-          description: model.description,
+          description: model.subtitle,
           imageUrl: model.imageUrl),
     );
   }

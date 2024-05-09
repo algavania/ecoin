@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecoin/data/models/quiz/quiz_model.dart';
+import 'package:ecoin/routes/router.dart';
 import 'package:ecoin/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -59,6 +60,7 @@ class _QuizPageState extends State<QuizPage> {
             const Spacer(),
             ElevatedButton(
                 onPressed: () {
+                  context.router.push(const QuizRoomRoute());
                 },
                 child: const Text('Mulai Kuis')),
             const SizedBox(

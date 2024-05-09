@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecoin/data/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
