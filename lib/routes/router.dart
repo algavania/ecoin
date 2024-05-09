@@ -48,6 +48,11 @@ class AppRouter extends _$AppRouter {
                       transitionsBuilder: TransitionsBuilders.fadeIn,
                     )
                   ]),
+              CustomRoute(
+                page: QuizRoute.page,
+                path: 'quiz',
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+              ),
             ]),
         CustomRoute(
           page: CreatureDetailRoute.page,
@@ -72,6 +77,16 @@ class AppRouter extends _$AppRouter {
         CustomRoute(
           page: ModelViewerRoute.page,
           path: '/viewer',
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
+        CustomRoute(
+          page: QuizRoomRoute.page,
+          path: '/quiz-room',
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
+        CustomRoute(
+          page: QuizResultRoute.page,
+          path: '/quiz-result',
           transitionsBuilder: TransitionsBuilders.fadeIn,
         ),
       ];

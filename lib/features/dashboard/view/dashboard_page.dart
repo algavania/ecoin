@@ -14,7 +14,7 @@ class DashboardPage extends StatelessWidget {
         HomeRoute(),
         StoryRoute(),
         CreatureRoute(),
-        HomeRoute(),
+        QuizRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return NavigationBar(
@@ -36,6 +36,10 @@ class DashboardPage extends StatelessWidget {
             NavigationDestination(
               icon: Icon(IconsaxPlusBold.document_normal),
               label: 'Kuis',
+            ),
+            NavigationDestination(
+              icon: Icon(IconsaxPlusBold.profile),
+              label: 'Akun',
             ),
           ],
         );
