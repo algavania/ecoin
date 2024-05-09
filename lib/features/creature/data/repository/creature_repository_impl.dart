@@ -10,7 +10,7 @@ class CreatureRepositoryImpl extends CreatureRepository {
     final list = <CreatureModel>[];
     var query = _db
         .collection(DbHelper.creatures)
-        .orderBy('createdAt', descending: true);
+        .orderBy('modelUrl', descending: true);
     if (limit != null) {
       query = query.limit(limit);
     }
@@ -29,7 +29,7 @@ class CreatureRepositoryImpl extends CreatureRepository {
     final res = await _db
         .collection(DbHelper.creatures)
         .where('creatureType', isEqualTo: type)
-        .orderBy('createdAt', descending: true)
+        .orderBy('modelUrl', descending: true)
         .get();
     for (final data in res.docs) {
       var model = CreatureModel.fromJson(data.data());

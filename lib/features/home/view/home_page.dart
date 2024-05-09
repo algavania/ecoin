@@ -110,10 +110,18 @@ class _HomePageState extends State<HomePage> {
     return CustomSectionWidget(
         title: 'Kuis Edukatif',
         rightText: 'Lihat Detail',
-        child: CustomCardWidget(
-          imageUrl: model.imageUrl,
-          title: model.title,
-          description: model.description,
+        rightOnTap: () {
+          AutoRouter.of(context).navigate(const QuizRoute());
+        },
+        child: GestureDetector(
+          onTap: () {
+            AutoRouter.of(context).navigate(const QuizRoute());
+          },
+          child: CustomCardWidget(
+            imageUrl: model.imageUrl,
+            title: model.title,
+            description: model.description,
+          ),
         ));
   }
 
@@ -179,10 +187,15 @@ class _HomePageState extends State<HomePage> {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (_, i) {
             final model = list[i];
-            return CustomCardWidget(
-                title: model.title,
-                description: model.subtitle,
-                imageUrl: model.imageUrl);
+            return GestureDetector(
+              onTap: () {
+                AutoRouter.of(context).push(StoryDetailRoute(storyModel: model));
+              },
+              child: CustomCardWidget(
+                  title: model.title,
+                  description: model.subtitle,
+                  imageUrl: model.imageUrl),
+            );
           },
           separatorBuilder: (_, __) =>
           const SizedBox(
