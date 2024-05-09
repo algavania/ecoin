@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:ecoin/core/color_values.dart';
 import 'package:ecoin/core/styles.dart';
 import 'package:ecoin/data/models/quiz/quiz_item_model.dart';
+import 'package:ecoin/routes/router.dart';
 import 'package:ecoin/utils/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +25,16 @@ class _QuizRoomPageState extends State<QuizRoomPage> {
   @override
   void initState() {
     _quizItems = [
-      QuizItemModel(question: 'Pertanyaan 1: Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
-      QuizItemModel(question: 'Pertanyaan 2: Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
-      QuizItemModel(question: 'Pertanyaan 3: Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now())
+      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
+      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
+      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
+      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
+      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
+      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
+      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
+      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
+      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
+      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now())
     ];
     super.initState();
   }
@@ -122,7 +130,7 @@ class _QuizRoomPageState extends State<QuizRoomPage> {
         if (_index.value < _quizItems.length - 1) {
           _index.value++;
         } else {
-          // Ke total nilai
+          AutoRouter.of(context).replace(QuizResultRoute(score: _score));
         }
       },
       child: Container(

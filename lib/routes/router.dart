@@ -82,5 +82,10 @@ class AppRouter extends _$AppRouter {
           path: '/quiz-room',
           transitionsBuilder: TransitionsBuilders.fadeIn,
         ),
+        CustomRoute(
+          page: QuizResultRoute.page,
+          path: '/quiz-result',
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
       ];
 }
