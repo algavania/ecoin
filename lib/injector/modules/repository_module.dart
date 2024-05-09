@@ -1,3 +1,5 @@
+import 'package:ecoin/features/creature/data/repository/creature_repository.dart';
+import 'package:ecoin/features/creature/data/repository/creature_repository_impl.dart';
 import 'package:ecoin/features/story/data/repository/story_repository.dart';
 import 'package:ecoin/features/story/data/repository/story_repository_impl.dart';
 import 'package:ecoin/injector/injector.dart';
@@ -7,8 +9,11 @@ class RepositoryModule {
 
   static void init() {
     Injector.instance
-      .registerFactory<StoryRepository>(
+      ..registerFactory<StoryRepository>(
         StoryRepositoryImpl.new,
+      )
+      ..registerFactory<CreatureRepository>(
+        CreatureRepositoryImpl.new,
       );
   }
 }

@@ -12,6 +12,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sizer/sizer.dart';
 
+import 'database/shared_preferences_service.dart';
+
 final appRouter = AppRouter();
 
 void main() async {
@@ -22,6 +24,7 @@ void main() async {
   );
   Injector.init();
   await Injector.instance.allReady();
+  await SharedPreferencesService.init();
   await Future<void>.delayed(const Duration(seconds: 3));
   FlutterNativeSplash.remove();
   runApp(const MyApp());
