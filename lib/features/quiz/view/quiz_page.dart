@@ -47,6 +47,9 @@ class _QuizPageState extends State<QuizPage> {
               context.loaderOverlay.hide();
               AutoRouter.of(context).push(QuizRoomRoute(list: s.list));
             },
+            error: (s) {
+              context.showSnackBar(message: s.error, isSuccess: false);
+            },
             orElse: () {});
       },
       child: Scaffold(

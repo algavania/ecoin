@@ -57,49 +57,75 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     _getGreetingBasedOnTime();
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ColorValues.white,
-        toolbarHeight: 0,
-      ),
-      body: RefreshIndicator(
-        onRefresh: _getAllData,
-        child: Stack(
-          children: [
-            ListView(physics: const AlwaysScrollableScrollPhysics(),),
-            SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: Column(
-                children: [
-                  _buildTopBarWidget(),
-                  const SizedBox(
-                    height: Styles.bigSpacing,
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: Styles.defaultPadding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildStorySection(),
-                        const SizedBox(
-                          height: Styles.bigSpacing,
-                        ),
-                        _buildCreatureSection(),
-                        const SizedBox(
-                          height: Styles.bigSpacing,
-                        ),
-                        _buildQuizSection(),
-                        const SizedBox(
-                          height: Styles.bigSpacing,
-                        ),
-                      ],
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<StoryBloc, StoryState>(
+          bloc: _storyBloc,
+          listener: (context, state) {
+            state.maybeMap(
+              error: (s) {
+                context.showSnackBar(message: s.error, isSuccess: false);
+              },
+              orElse: () {}
+            );
+          },
+        ),
+        BlocListener<CreatureBloc, CreatureState>(
+          bloc: _creatureBloc,
+          listener: (context, state) {
+            state.maybeMap(
+                error: (s) {
+                  context.showSnackBar(message: s.error, isSuccess: false);
+                },
+                orElse: () {}
+            );
+          },
+        )
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: ColorValues.white,
+          toolbarHeight: 0,
+        ),
+        body: RefreshIndicator(
+          onRefresh: _getAllData,
+          child: Stack(
+            children: [
+              ListView(physics: const AlwaysScrollableScrollPhysics(),),
+              SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Column(
+                  children: [
+                    _buildTopBarWidget(),
+                    const SizedBox(
+                      height: Styles.bigSpacing,
                     ),
-                  )
-                ],
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: Styles.defaultPadding),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildStorySection(),
+                          const SizedBox(
+                            height: Styles.bigSpacing,
+                          ),
+                          _buildCreatureSection(),
+                          const SizedBox(
+                            height: Styles.bigSpacing,
+                          ),
+                          _buildQuizSection(),
+                          const SizedBox(
+                            height: Styles.bigSpacing,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

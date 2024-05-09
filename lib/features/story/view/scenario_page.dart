@@ -60,6 +60,9 @@ class _ScenarioPageState extends State<ScenarioPage> {
               AutoRouter.of(context).push(ScenarioResultRoute(
                   storyModel: widget.storyModel, endingModel: s.list.first));
             },
+            error: (s) {
+              context.showSnackBar(message: s.error, isSuccess: false);
+            },
             orElse: () {});
       },
       child: Scaffold(

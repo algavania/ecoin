@@ -14,8 +14,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 
 @RoutePage()
 class StoryDetailPage extends StatefulWidget {
-  const StoryDetailPage(
-      {super.key, required this.storyModel,});
+  const StoryDetailPage({super.key, required this.storyModel,});
 
   final StoryModel storyModel;
 
@@ -28,55 +27,66 @@ class _StoryDetailPageState extends State<StoryDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Detail Cerita'),
-      ),
-      bottomNavigationBar: Container(
-        color: ColorValues.white,
-        padding: const EdgeInsets.all(Styles.defaultPadding),
-        child: ElevatedButton(
-          onPressed: () {
-            _bloc.add(StoryEvent.getScenarios(widget.storyModel.id!));
-          },
-          child: const Text('Mulai Cerita'),
+    return BlocListener<StoryBloc, StoryState>(
+      bloc: _bloc,
+      listener: (context, state) {
+        state.maybeMap(
+            error: (s) {
+              context.showSnackBar(message: s.error, isSuccess: false);
+            },
+            orElse: () {}
+        );
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Detail Cerita'),
         ),
-      ),
-      body: BlocListener<StoryBloc, StoryState>(
-        bloc: _bloc,
-        listener: (context, state) {
-          state.maybeMap(
-              overlayLoading: (_) {
-                if (!context.loaderOverlay.visible) {
-                  context.loaderOverlay.show();
-                }
-              },
-              scenariosLoaded: (s) {
-                context.loaderOverlay.hide();
-                AutoRouter.of(context).push(ScenarioRoute(
-                    storyModel: widget.storyModel,
-                    list: s.list,
-                    answers: const [],
-                    index: 0));
-              },
-              orElse: () {});
-        },
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(Styles.defaultPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildStoryCard(),
-                const SizedBox(
-                  height: Styles.bigSpacing,
-                ),
-                _buildDescriptionWidget(),
-                const SizedBox(
-                  height: Styles.bigSpacing,
-                ),
-                _buildRequirementsWidget(),
-              ],
+        bottomNavigationBar: Container(
+          color: ColorValues.white,
+          padding: const EdgeInsets.all(Styles.defaultPadding),
+          child: ElevatedButton(
+            onPressed: () {
+              _bloc.add(StoryEvent.getScenarios(widget.storyModel.id!));
+            },
+            child: const Text('Mulai Cerita'),
+          ),
+        ),
+        body: BlocListener<StoryBloc, StoryState>(
+          bloc: _bloc,
+          listener: (context, state) {
+            state.maybeMap(
+                overlayLoading: (_) {
+                  if (!context.loaderOverlay.visible) {
+                    context.loaderOverlay.show();
+                  }
+                },
+                scenariosLoaded: (s) {
+                  context.loaderOverlay.hide();
+                  AutoRouter.of(context).push(ScenarioRoute(
+                      storyModel: widget.storyModel,
+                      list: s.list,
+                      answers: const [],
+                      index: 0));
+                },
+                orElse: () {});
+          },
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(Styles.defaultPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildStoryCard(),
+                  const SizedBox(
+                    height: Styles.bigSpacing,
+                  ),
+                  _buildDescriptionWidget(),
+                  const SizedBox(
+                    height: Styles.bigSpacing,
+                  ),
+                  _buildRequirementsWidget(),
+                ],
+              ),
             ),
           ),
         ),
@@ -100,39 +110,39 @@ class _StoryDetailPageState extends State<StoryDetailPage> {
           children: [
             Expanded(
                 child: _buildRequirementCard(
-              'Beragam Ending',
-              RichText(
-                text: TextSpan(
-                    text: 'Ada ',
-                    style: context.textTheme.bodyMedium,
-                    children: [
-                      TextSpan(
-                          text: '3 ending',
-                          style: context.textTheme.titleMedium
-                              .copyWith(color: ColorValues.grey50)),
-                      const TextSpan(text: ' berbeda untuk  didapatkan.'),
-                    ]),
-              ),
-            )),
+                  'Beragam Ending',
+                  RichText(
+                    text: TextSpan(
+                        text: 'Ada ',
+                        style: context.textTheme.bodyMedium,
+                        children: [
+                          TextSpan(
+                              text: '3 ending',
+                              style: context.textTheme.titleMedium
+                                  .copyWith(color: ColorValues.grey50)),
+                          const TextSpan(text: ' berbeda untuk  didapatkan.'),
+                        ]),
+                  ),
+                )),
             const SizedBox(
               width: Styles.defaultSpacing,
             ),
             Expanded(
                 child: _buildRequirementCard(
-              'Tentukan Aksimu',
-              RichText(
-                text: TextSpan(
-                    text: 'Ending ditentukan dari keputusan ',
-                    style: context.textTheme.bodyMedium,
-                    children: [
-                      TextSpan(
-                          text: 'pilihanmu',
-                          style: context.textTheme.titleMedium
-                              .copyWith(color: ColorValues.grey50)),
-                      const TextSpan(text: '.'),
-                    ]),
-              ),
-            )),
+                  'Tentukan Aksimu',
+                  RichText(
+                    text: TextSpan(
+                        text: 'Ending ditentukan dari keputusan ',
+                        style: context.textTheme.bodyMedium,
+                        children: [
+                          TextSpan(
+                              text: 'pilihanmu',
+                              style: context.textTheme.titleMedium
+                                  .copyWith(color: ColorValues.grey50)),
+                          const TextSpan(text: '.'),
+                        ]),
+                  ),
+                )),
           ],
         )
       ],
