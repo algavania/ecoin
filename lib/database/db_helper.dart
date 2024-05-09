@@ -5,6 +5,7 @@ class DbHelper {
   static const endings = 'endings';
   static const scenarios = 'scenarios';
   static const creatures = 'creatures';
+  static const quiz = 'quiz';
 
   static const negativeEnding = 'Ending Negatif';
   static const neutralEnding = 'Ending Netral';

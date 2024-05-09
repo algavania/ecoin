@@ -23,7 +23,7 @@ class QuizModel with _$QuizModel {
 QuizModel generateMockQuizModel() {
   return QuizModel(title: 'Ekologi',
       description: 'Uji pemahamanmu mengenai lingkungan dalam kuis ekologi.',
-      imageUrl: 'https://firebasestorage.googleapis.com/v0/b/ecoin-extend.appspot.com/o/ecology-98%20(1)%202.png?alt=media&token=276c7813-b5b0-4f4a-9301-39912ba9ce3b',
+      imageUrl: 'https://firebasestorage.googleapis.com/v0/b/ecoin-extend.appspot.com/o/thumbnail%20quiz.png?alt=media&token=6d12d23b-caf2-4b92-9d46-f5158c4b2693',
       createdAt: DateTime.now());
 }
 

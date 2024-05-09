@@ -32,7 +32,7 @@ class CreatureBloc extends Bloc<CreatureEvent, CreatureState> {
       ) async {
     emit(const CreatureState.loading());
     try {
-      final list = await _repository.getAllCreatures();
+      final list = await _repository.getAllCreatures(limit: event.limit);
       emit(CreatureState.loaded(list));
     } catch (e, s) {
       logger.e(e.toString(), stackTrace: s);

@@ -1,79 +1,60 @@
-import 'dart:ffi';
 
 import 'package:ecoin/core/color_values.dart';
 import 'package:ecoin/core/styles.dart';
 import 'package:ecoin/data/models/quiz/quiz_item_model.dart';
 import 'package:ecoin/routes/router.dart';
 import 'package:ecoin/utils/extensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
 @RoutePage()
 class QuizRoomPage extends StatefulWidget {
-  const QuizRoomPage({super.key});
+  const QuizRoomPage({super.key, required this.list});
+  final List<QuizItemModel> list;
 
   @override
   State<QuizRoomPage> createState() => _QuizRoomPageState();
 }
 
 class _QuizRoomPageState extends State<QuizRoomPage> {
-  final ValueNotifier<int> _index = ValueNotifier(0);
-  List<QuizItemModel> _quizItems = [];
+  var _index = 0;
   int _score = 0;
 
   @override
-  void initState() {
-    _quizItems = [
-      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
-      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
-      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
-      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
-      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
-      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
-      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
-      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
-      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now()),
-      QuizItemModel(question: 'Apa yang dimaksud dengan ekosistem?', answer: 'A', choices: {'A': 'Ini adalah pilihan A.', 'B': 'Ini adalah pilihan B.', 'C': 'Ini adalah pilihan C.', 'D': 'Ini adalah pilihan D.'}, createdAt: DateTime.now())
-    ];
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Ruang Kuis'),
-        actions: [
-          ValueListenableBuilder(
-            valueListenable: _index,
-            builder: (context, _, __) {
-              return Text(
-              '${_index.value + 1}/${_quizItems.length}',
-                style: context.textTheme.titleMedium
-                    .copyWith(color: ColorValues.primary70),
-              );
-            }
+    return PopScope(
+      canPop: _index == 0,
+      onPopInvoked: (_) {
+        if (_index > 0) {
+          setState(() {
+            _index--;
+          });
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Ruang Kuis'),
+          actions: [
+            Text(
+              '${_index + 1}/${widget.list.length}',
+              style: context.textTheme.titleMedium
+                  .copyWith(color: ColorValues.primary70),
+            ),
+            const SizedBox(
+              width: Styles.defaultPadding,
+            ),
+          ]
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(Styles.defaultPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildQuestionWidget(widget.list[_index].question),
+              const SizedBox(height: Styles.bigPadding),
+              _buildAnswerWidget(widget.list[_index]),
+            ],
           ),
-          const SizedBox(
-            width: Styles.defaultPadding,
-          ),
-        ]
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(Styles.defaultPadding),
-        child: ValueListenableBuilder(
-          valueListenable: _index,
-          builder: (context, _, __) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildQuestionWidget(_quizItems[_index.value].question),
-                const SizedBox(height: Styles.bigPadding),
-                _buildAnswerWidget(_quizItems[_index.value]),
-              ],
-            );
-          }
         ),
       ),
     );
@@ -84,7 +65,7 @@ class _QuizRoomPageState extends State<QuizRoomPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Soal ${_index.value + 1}',
+          'Soal ${_index + 1}',
           style: context.textTheme.titleMedium,
         ),
         const SizedBox(height: Styles.defaultSpacing),
@@ -127,8 +108,10 @@ class _QuizRoomPageState extends State<QuizRoomPage> {
           _score++;
         }
 
-        if (_index.value < _quizItems.length - 1) {
-          _index.value++;
+        if (_index < widget.list.length - 1) {
+          setState(() {
+            _index++;
+          });
         } else {
           AutoRouter.of(context).replace(QuizResultRoute(score: _score));
         }

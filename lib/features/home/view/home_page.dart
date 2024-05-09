@@ -44,14 +44,14 @@ class _HomePageState extends State<HomePage> {
         .addAll(List.generate(3, (index) => generateMockStoryModel()));
     _dummyCreatureList
         .addAll(List.generate(6, (index) => generateMockCreatureModel()));
-    _dummyQuizList.addAll(List.generate(3, (index) => generateMockQuizModel()));
+    _dummyQuizList.addAll(List.generate(1, (index) => generateMockQuizModel()));
     _getAllData();
     super.initState();
   }
 
   Future<void> _getAllData() async {
-    _storyBloc.add(const StoryEvent.getAllStories());
-    _creatureBloc.add(const CreatureEvent.getAllCreatures());
+    _storyBloc.add(const StoryEvent.getAllStories(limit: 3));
+    _creatureBloc.add(const CreatureEvent.getAllCreatures(limit: 6));
   }
 
   @override
@@ -110,10 +110,18 @@ class _HomePageState extends State<HomePage> {
     return CustomSectionWidget(
         title: 'Kuis Edukatif',
         rightText: 'Lihat Detail',
-        child: CustomCardWidget(
-          imageUrl: model.imageUrl,
-          title: model.title,
-          description: model.description,
+        rightOnTap: () {
+          AutoRouter.of(context).navigate(const QuizRoute());
+        },
+        child: GestureDetector(
+          onTap: () {
+            AutoRouter.of(context).navigate(const QuizRoute());
+          },
+          child: CustomCardWidget(
+            imageUrl: model.imageUrl,
+            title: model.title,
+            description: model.description,
+          ),
         ));
   }
 
@@ -179,10 +187,15 @@ class _HomePageState extends State<HomePage> {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (_, i) {
             final model = list[i];
-            return CustomCardWidget(
-                title: model.title,
-                description: model.subtitle,
-                imageUrl: model.imageUrl);
+            return GestureDetector(
+              onTap: () {
+                AutoRouter.of(context).push(StoryDetailRoute(storyModel: model));
+              },
+              child: CustomCardWidget(
+                  title: model.title,
+                  description: model.subtitle,
+                  imageUrl: model.imageUrl),
+            );
           },
           separatorBuilder: (_, __) =>
           const SizedBox(

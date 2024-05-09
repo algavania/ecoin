@@ -6,12 +6,15 @@ class CreatureRepositoryImpl extends CreatureRepository {
   final _db = DbHelper.db;
 
   @override
-  Future<List<CreatureModel>> getAllCreatures() async {
+  Future<List<CreatureModel>> getAllCreatures({int? limit}) async {
     final list = <CreatureModel>[];
-    final res = await _db
+    var query = _db
         .collection(DbHelper.creatures)
-        .orderBy('createdAt', descending: true)
-        .get();
+        .orderBy('modelUrl', descending: true);
+    if (limit != null) {
+      query = query.limit(limit);
+    }
+    final res = await query.get();
     for (final data in res.docs) {
       var model = CreatureModel.fromJson(data.data());
       model = model.copyWith(id: data.id);
@@ -26,7 +29,7 @@ class CreatureRepositoryImpl extends CreatureRepository {
     final res = await _db
         .collection(DbHelper.creatures)
         .where('creatureType', isEqualTo: type)
-        .orderBy('createdAt', descending: true)
+        .orderBy('modelUrl', descending: true)
         .get();
     for (final data in res.docs) {
       var model = CreatureModel.fromJson(data.data());

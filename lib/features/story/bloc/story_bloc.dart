@@ -38,7 +38,7 @@ class StoryBloc extends Bloc<StoryEvent, StoryState> {
       ) async {
     emit(const StoryState.loading());
     try {
-      final list = await _repository.getAllStories();
+      final list = await _repository.getAllStories(limit: event.limit);
       emit(StoryState.loaded(list));
     } catch (e, s) {
       logger.e(e.toString(), stackTrace: s);

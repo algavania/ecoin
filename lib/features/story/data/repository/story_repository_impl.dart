@@ -8,9 +8,13 @@ class StoryRepositoryImpl extends StoryRepository {
   final _db = DbHelper.db;
 
   @override
-  Future<List<StoryModel>> getAllStories() async {
+  Future<List<StoryModel>> getAllStories({int? limit}) async {
     final list = <StoryModel>[];
-    final res = await _db.collection(DbHelper.stories).orderBy('createdAt').get();
+    var query = _db.collection(DbHelper.stories).orderBy('createdAt');
+    if (limit != null) {
+      query = query.limit(limit);
+    }
+    final res = await query.get();
     for (final data in res.docs) {
       var model = StoryModel.fromJson(data.data());
       model = model.copyWith(id: data.id);
