@@ -4,6 +4,7 @@ import 'package:ecoin/core/styles.dart';
 import 'package:ecoin/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class CustomCardWidget extends StatelessWidget {
   const CustomCardWidget({super.key,
@@ -33,14 +34,16 @@ class CustomCardWidget extends StatelessWidget {
               SizedBox(width: 40.w,),
             ],
           ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(Styles.defaultBorder),
-                  bottomRight: Radius.circular(Styles.defaultBorder),
-                ),
-                child: CachedNetworkImage(imageUrl: imageUrl, fit: BoxFit.cover, height: 20.h, )),
+          Skeleton.ignore(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(Styles.defaultBorder),
+                    bottomRight: Radius.circular(Styles.defaultBorder),
+                  ),
+                  child: CachedNetworkImage(imageUrl: imageUrl, fit: BoxFit.cover, height: 20.h, )),
+            ),
           ),
         ],
       ),

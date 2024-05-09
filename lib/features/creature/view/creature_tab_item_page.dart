@@ -4,6 +4,7 @@ import 'package:ecoin/data/models/creature/creature_model.dart';
 import 'package:ecoin/features/creature/bloc/creature_bloc.dart';
 import 'package:ecoin/features/creature/data/repository/creature_repository.dart';
 import 'package:ecoin/injector/injector.dart';
+import 'package:ecoin/utils/extensions.dart';
 import 'package:ecoin/widgets/custom_creature_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 @RoutePage()
 class CreatureTabItemPage extends StatefulWidget {
   const CreatureTabItemPage({super.key, required this.type,});
+
   final String type;
 
   @override
@@ -33,30 +35,41 @@ class _CreatureTabItemPageState extends State<CreatureTabItemPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreatureBloc, CreatureState>(
+    return BlocListener<CreatureBloc, CreatureState>(
       bloc: _bloc,
-      builder: (context, state) {
-        return RefreshIndicator(
-          onRefresh: () async {
-            _bloc.add(CreatureEvent.getCreaturesByType(widget.type));
-          },
-          child: Stack(
-            children: [
-              ListView(physics: const AlwaysScrollableScrollPhysics(),),
-              SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.all(Styles.defaultPadding),
-                  child: state.maybeMap(
-                    loaded: (s) => _buildList(s.list, false),
-                    orElse: () => _buildList(_dummyList, true),
-                  ),
-                ),
-              ),
-            ],
-          ),
+      listener: (context, state) {
+        state.maybeMap(
+            error: (s) {
+              context.showSnackBar(message: s.error, isSuccess: false);
+            },
+            orElse: () {}
         );
       },
+      child: BlocBuilder<CreatureBloc, CreatureState>(
+        bloc: _bloc,
+        builder: (context, state) {
+          return RefreshIndicator(
+            onRefresh: () async {
+              _bloc.add(CreatureEvent.getCreaturesByType(widget.type));
+            },
+            child: Stack(
+              children: [
+                ListView(physics: const AlwaysScrollableScrollPhysics(),),
+                SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(Styles.defaultPadding),
+                    child: state.maybeMap(
+                      loaded: (s) => _buildList(s.list, false),
+                      orElse: () => _buildList(_dummyList, true),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 

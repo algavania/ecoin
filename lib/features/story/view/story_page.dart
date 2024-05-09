@@ -34,38 +34,50 @@ class _StoryPageState extends State<StoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cerita Interaktif'),
-      ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          _bloc.add(const StoryEvent.getAllStories());
-        },
-        child: Stack(
-          children: [
-            ListView(physics: const AlwaysScrollableScrollPhysics(),),
-            SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.all(Styles.defaultPadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Pelajari dan temukan berbagai  ending dari pilihan yang kamu buat dalam cerita interaktif.',
-                      style: context.textTheme.bodyMedium
-                          .copyWith(color: ColorValues.grey50),
-                    ),
-                    const SizedBox(
-                      height: Styles.bigSpacing,
-                    ),
-                    CustomSectionWidget(title: 'Pilihan Cerita', child: _buildBody()),
-                  ],
+    return BlocListener<StoryBloc, StoryState>(
+      bloc: _bloc,
+      listener: (context, state) {
+        state.maybeMap(
+            error: (s) {
+              context.showSnackBar(message: s.error, isSuccess: false);
+            },
+            orElse: () {}
+        );
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Cerita Interaktif'),
+        ),
+        body: RefreshIndicator(
+          onRefresh: () async {
+            _bloc.add(const StoryEvent.getAllStories());
+          },
+          child: Stack(
+            children: [
+              ListView(physics: const AlwaysScrollableScrollPhysics(),),
+              SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: const EdgeInsets.all(Styles.defaultPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Pelajari dan temukan berbagai  ending dari pilihan yang kamu buat dalam cerita interaktif.',
+                        style: context.textTheme.bodyMedium
+                            .copyWith(color: ColorValues.grey50),
+                      ),
+                      const SizedBox(
+                        height: Styles.bigSpacing,
+                      ),
+                      CustomSectionWidget(
+                          title: 'Pilihan Cerita', child: _buildBody()),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -102,9 +114,10 @@ class _StoryPageState extends State<StoryPage> {
                   imageUrl: model.imageUrl),
             );
           },
-          separatorBuilder: (_, __) => const SizedBox(
-                height: Styles.defaultSpacing,
-              ),
+          separatorBuilder: (_, __) =>
+          const SizedBox(
+            height: Styles.defaultSpacing,
+          ),
           itemCount: list.length),
     );
   }
