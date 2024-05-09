@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ecoin/data/models/creature/creature_model.dart';
+import 'package:ecoin/database/db_helper.dart';
 import 'package:ecoin/routes/router.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +15,10 @@ class CreaturePage extends StatefulWidget {
 class _CreaturePageState extends State<CreaturePage> {
   @override
   Widget build(BuildContext context) {
-    final list = List.generate(10, (_) => generateMockCreatureModel());
     return AutoTabsRouter.tabBar(
       routes: [
-        CreatureTabItemRoute(list: list),
-        CreatureTabItemRoute(list: list),
+        CreatureTabItemRoute(type: DbHelper.typeAnimal),
+        CreatureTabItemRoute(type: DbHelper.typePlant),
       ],
       builder: (context, child, controller) {
         return Scaffold(
@@ -27,8 +27,8 @@ class _CreaturePageState extends State<CreaturePage> {
             bottom: TabBar(
               controller: controller,
               tabs: const [
-                Tab(text: 'Hewan'),
-                Tab(text: 'Tumbuhan'),
+                Tab(text: DbHelper.typeAnimal),
+                Tab(text: DbHelper.typePlant),
               ],
             ),
           ),
