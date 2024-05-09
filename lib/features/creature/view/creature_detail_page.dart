@@ -86,7 +86,7 @@ class _CreatureDetailPageState extends State<CreatureDetailPage> {
           const SizedBox(height: 5.0),
           _buildMainInfo('Nama Ilmiah', widget.creature.scientificName),
           _buildMainInfo('Kelas', widget.creature.category),
-          _buildMainInfo('Asal', widget.creature.origin),
+          _buildMainInfo('Habitat', widget.creature.origin),
         ],
       ),
     );
@@ -111,7 +111,8 @@ class _CreatureDetailPageState extends State<CreatureDetailPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildDetailInfo('Deskripsi Singkat', widget.creature.description),
+          _buildDetailInfo('Deskripsi Singkat',
+              widget.creature.description.replaceToNewLine()),
         ],
       ),
     );
