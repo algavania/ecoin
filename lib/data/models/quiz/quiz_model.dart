@@ -13,7 +13,7 @@ class QuizModel with _$QuizModel {
     required String description,
     required String imageUrl,
     @TimestampConverter() required DateTime createdAt,
-    int? id,
+    String? id,
   }) = _QuizModel;
 
   factory QuizModel.fromJson(Map<String, Object?> json) =>

@@ -115,3 +115,9 @@ extension FormattedDateTime on DateTime {
     return DateFormat('yyyyMM').format(this);
   }
 }
+
+extension CustomConverter on String {
+  String replaceToNewLine() {
+    return replaceAll(r'\n', '\n');
+  }
+}

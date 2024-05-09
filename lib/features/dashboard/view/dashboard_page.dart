@@ -12,7 +12,7 @@ class DashboardPage extends StatelessWidget {
     return AutoTabsScaffold(
       routes: const [
         HomeRoute(),
-        HomeRoute(),
+        StoryRoute(),
         CreatureRoute(),
         HomeRoute(),
         HomeRoute(),
