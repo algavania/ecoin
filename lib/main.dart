@@ -17,16 +17,13 @@ import 'database/shared_preferences_service.dart';
 final appRouter = AppRouter();
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   Injector.init();
   await Injector.instance.allReady();
   await SharedPreferencesService.init();
-  await Future<void>.delayed(const Duration(seconds: 3));
-  FlutterNativeSplash.remove();
   runApp(const MyApp());
 }
 
