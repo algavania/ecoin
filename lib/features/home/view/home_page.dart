@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _dummyStoryList
-        .addAll(List.generate(3, (index) => generateMockStoryModel()));
+        .addAll(List.generate(1, (index) => generateMockStoryModel()));
     _dummyCreatureList
         .addAll(List.generate(6, (index) => generateMockCreatureModel()));
     _dummyQuizList.addAll(List.generate(1, (index) => generateMockQuizModel()));
@@ -50,8 +50,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _getAllData() async {
-    _storyBloc.add(const StoryEvent.getAllStories(limit: 3));
+    _storyBloc.add(const StoryEvent.getAllStories(limit: 1));
     _creatureBloc.add(const CreatureEvent.getAllCreatures(limit: 6));
+    if (mounted) {
+      setState(() {
+
+      });
+    }
   }
 
   @override
@@ -192,7 +197,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildStorySection() {
     return CustomSectionWidget(
         title: 'Cerita Interaktif',
-        rightText: 'Lihat Detail',
+        rightText: 'Lihat Semua',
         rightOnTap: () => AutoRouter.of(context).navigate(const StoryRoute()),
         child: BlocBuilder<StoryBloc, StoryState>(
           bloc: _storyBloc,
